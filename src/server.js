@@ -1,9 +1,3 @@
-// Second file, configurations and importiing of libraries
-// express: framework to comnicate with the frontend
-// cors: to do validations and security
-// routes: redirec to the file routes in the folder routes
-// conection: to connect  with the configuration of the database in the file connection of the folder database
-// APP_PORT: to use the enviroment variables (passwords and user names) saved in the .env file
 const express = require("express")
 const cors = require('cors')
 const routes = require("./routes/routes")
@@ -20,7 +14,7 @@ class Server {
 
     async middlewares(server) {
         console.log("Executando os middlewares")
-        server.use(cors()) // Quando tiver em Produção Habilita os Cors
+        server.use(cors())
         server.use(express.json())
         console.log("Middlewares executados")
     }
