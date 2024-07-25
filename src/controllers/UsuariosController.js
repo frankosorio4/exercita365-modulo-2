@@ -1,7 +1,21 @@
+const Usuario = require('../models/Usuario')
+
 const padraoEmail = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 const padraoCPF = new RegExp(/^\d{11}$/);
-const padraoDataNascimento = new RegExp(/^\d{4}-\d{2}-\d{2}$/); // Date in YYYY-MM-DD format
-const Usuario = require('../models/Usuario')
+function isValidDate(dateString) {
+    // Check the date format
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+        return false;
+    }
+
+    // Parse the date parts
+    const [year, month, day] = dateString.split('-').map(Number);
+
+    // Check the date validity, use the constructor Date of js
+    const date = new Date(year, month - 1, day);
+    //return true or false
+    return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+} // Date in YYYY-MM-DD format
 
 class UsuarioController {
 
@@ -13,6 +27,12 @@ class UsuarioController {
                 return response.
                     status(400).
                     json({ mensagem: 'Um o mais dados faltantes. O nome, sexo, cpf, endereço, email, senha, e data de nascimento são obrigatórios.' })
+            }
+
+            if (dados.nome?.length > 100) {
+                return response
+                    .status(400)
+                    .json({ mensagem: 'O nome nao pode ter mais de 100 digitos.' })
             }
 
             if (!isNaN(dados.nome)){
@@ -67,16 +87,14 @@ class UsuarioController {
             }
             //revisar si envia solo numeros email
 
-
             if (!(dados.senha?.length >= 8 && dados.senha?.length <= 16)) {
                 return response
                     .status(400)
                     .json({ mensagem: 'A senha deve ter entre 8 e 16 dígitos' })
             }
 
-
             //validar data nascimento
-            if (!padraoDataNascimento.test(dados.dataNascimento)) {
+            if (!isValidDate(dados.dataNascimento)) {
                 return response
                     .status(400)
                     .json({ mensagem: 'O formato da data de nascimento é inválido. O formato correto é YYYY-MM-DD.' });
@@ -102,7 +120,7 @@ class UsuarioController {
                 createdAt: usuario.createdAt
             })
         } catch (error) {
-            //console.log(error)
+            console.log(error)
             response
                 .status(500)
                 .json({
