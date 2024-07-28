@@ -19,7 +19,7 @@ function validaToken(request, response, next) {
         next()
     } catch (error) {
         console.log(error)
-        if(error.message === "jwt malformed" || error.message === "jwt expired") {
+        if(error.message === "jwt malformed" || error.message === "jwt expired" || error.message === "invalid signature") {
             response.status(401).json({ mensagem: 'O Token está inválido ou expirado' })
         } else {
             response.status(500).json({ mensagem: 'A requisição falhou' })
