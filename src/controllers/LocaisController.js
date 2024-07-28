@@ -31,13 +31,12 @@ class LocaisController {
                     .json({ mensagem: 'CEP mal formatado. O cep so tem que conter 8 numeros.' })
             }
 
-            // console.log(dados.cep)
-            // const dadosApi = await getMapLocal(dados.cep);
-            // console.log(dadosApi);
-            // const linkGoogleMaps = await getGoogleMapsLink(dadosApi);
-            // console.log(linkGoogleMaps);
+            const dadosApi = await getMapLocal(dados.cep);
+            if(dadosApi.erro === 'CEP não encontrado'){
+                return response.status(404).json({mensagem:'CEP não encontrado'})
+            }
+            const linkGoogleMaps = await getGoogleMapsLink(dadosApi);
 
-            // API para solicitar datos faltantes
             const local = await Local.create({
                 nomeLocal: dados.nomeLocal,
                 usuarioId: request.usuarioId,
@@ -51,40 +50,22 @@ class LocaisController {
                 cidade: dadosApi.city,
                 estado: dadosApi.state,
                 linkGoogleMaps: linkGoogleMaps
-                // nomeLocal: dados.nomeLocal,
-                // usuarioId: request.usuarioId,// CHECK
-                // descricao: dados.descricao,
-                // cep: dados.cep,
-                // numeroLocal: dados.numeroLocal,
-                // latitude: dados.latitude,
-                // longitude: dados.longitude,
-                // logradouro: dados.logradouro,
-                // bairro: dados.bairro,
-                // cidade: dados.cidade,
-                // estado: dados.estado,
-                // linkGoogleMaps: dados.linkGoogleMaps
             })
 
             response.status(201).json(local);
-            //or to list some fields
-            // response.status(201).json({
-            //     nome: Local.nome,
-            //     idade: Local.idade,
-            //     cep: Local.cep
-            // });
 
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             return response.status(500).json({ mensagem: 'Erro no servidor' });
         }
     }
 
-    //TO DO  validar solo usuario puede accesar a sus locales
     async listar(request, response) {
         try {
             const locais = await Local.findAll({
                 where: {usuarioId: request.usuarioId}
             });
+            //validating if user create the local
             if (locais.length === 0){
                 return response.status(200).json({mensagem: 'Você nao tem locais cadastrados.'})
             }
@@ -105,18 +86,12 @@ class LocaisController {
                 return response.status(404).json({ mensagem: 'Local não encontrado' });
             }
 
+            //validating if user create the local
             if(local.localId !== request.usuarioId){
                 return response.status(403).json({mensagem: 'Você nao tem permissao listar este local.'})
             }
 
             return response.status(201).json(local);
-            //or to list some fields
-            // response.status(201).json({
-            //     id: local.id,
-            //     nome: local.nome,
-            //     idade: local.idade,
-            //     email: local.email
-            // });
             
         } catch (error) {
             console.log(error);
@@ -124,15 +99,14 @@ class LocaisController {
         }
     }
 
-    //TO DO validar solo usuario puede editar a sus locales
     async editar(request, response) {
         try {
 
             const localId = request.params.id;
             const dados = request.body;
 
-            if (!dados.nomeLocal || !dados.descricao || !dados.cep ) {
-                return response.status(400).json({ mensagen: 'Os campos nome, descriçao do local, cep são obrigatorios' })
+            if (!dados.nomeLocal && !dados.descricao && !dados.cep && !dados.numeroLocal) {
+                return response.status(400).json({ mensagen: 'Você debe introduzir um destes campos; nome, descrição do local, CEP ou numero de local.' })
             }
 
             if (!isNaN(dados.nomeLocal)){
@@ -148,45 +122,57 @@ class LocaisController {
             }
 
             //validating cep
-            if ( dados.cep?.length !== 8 || isNaN(dados.cep)) {
-                return response
-                    .status(400)
-                    .json({ mensagem: 'CEP mal formatado. O cep so tem que conter 8 numeros.' })
+            if(dados.cep){
+                if ( dados.cep?.length !== 8 || isNaN(dados.cep)) {
+                    return response
+                        .status(400)
+                        .json({ mensagem: 'CEP mal formatado. O cep so tem que conter 8 numeros.' })
+                }
             }
 
-            const local = await Local.findByPk(localId);
-            if (!local) {
+            const dadosLocalDb = await Local.findByPk(localId);
+
+            if (!dadosLocalDb) {
                 return response.status(404).json({ mensagem: 'Local não encontrado' });
             }
-
-            if(local.usuarioId !== request.usuarioId){
+            
+            //validating if user create the local
+            if(dadosLocalDb.usuarioId !== request.usuarioId){
                 return response.status(403).json({mensagem: 'Você nao tem permissao para editar este local'})
             }
 
-            //validation TO DO
+            if(dados.cep){
+                console.log(dados.cep)
+                const dadosApi = await getMapLocal(dados.cep);
 
-            // local.nome = dados.nome ?? local.nome;
-            // local.idade = dados.idade ?? local.idade;
-            // local.email = dados.email ?? local.email;
-            // local.senha = dados.senha ?? local.senha;
-            // local.sexo = dados.sexo ?? local.sexo;
+                if(dadosApi.erro === 'CEP não encontrado'){
+                    return response.status(404).json({mensagem:'CEP não encontrado'})
+                }
 
-            await local.save();
+                const linkGoogleMaps = await getGoogleMapsLink(dadosApi);
+
+                dadosLocalDb.cep = dadosApi.cep,
+                dadosLocalDb.latitude = dadosApi.lat,
+                dadosLocalDb.longitude = dadosApi.lng,
+                dadosLocalDb.logradouro = dadosApi.address,
+                dadosLocalDb.bairro = dadosApi.district,
+                dadosLocalDb.cidade = dadosApi.city,
+                dadosLocalDb.estado = dadosApi.state,
+                dadosLocalDb.linkGoogleMaps = linkGoogleMaps
+            }
+            dadosLocalDb.nomeLocal = dados.nomeLocal ?? dadosLocalDb.nomeLocal;
+            dadosLocalDb.descricao = dados.descricao ?? dadosLocalDb.descricao;
+            dadosLocalDb.numeroLocal = dados.numeroLocal ?? dadosLocalDb.numeroLocal;
+
+            await dadosLocalDb.save();
             //204 does not return anything
-            return response.status(204).json();
-            //or to list some fields
-            // response.status(201).json({
-            //     nome: local.nome,
-            //     idade: local.idade,
-            //     email: local.email
-            // });
+            return response.status(200).json(dadosLocalDb);
         } catch (error) {
             console.log(error);
             return response.status(500).json({ mensagem: 'Erro no servidor' });
         }
     }
 
-    //TO DO validar solo usuario puede BORRAR a sus locales
     async deletar(request, response) {
         try {
             const localId = request.params.id;
@@ -197,6 +183,7 @@ class LocaisController {
                 return response.status(404).json({ mensagem: 'Local não encontrado' });
             }
 
+            //validating if user create the local
             if(local.usuarioId !== request.usuarioId){
                 return response.status(403).json({mensagem: 'Você nao tem permissao para deletar este local'})
             }
@@ -211,6 +198,26 @@ class LocaisController {
         }
     }
 
+    async mapaLocal(request, response){
+        try{
+            const localId = request.params.id;
+
+            const local = await Local.findByPk(localId);
+
+            if (!local) {
+                return response.status(404).json({ mensagem: 'Local não encontrado' });
+            }
+
+            if(local.usuarioId !== request.usuarioId){
+                return response.status(403).json({mensagem: 'Você nao tem permissao para deletar este local'})
+            }
+
+            return response.status(200).json(local.linkGoogleMaps)
+        }catch (error){
+            console.log(error);
+            return response.status(500).json({ mensagem: 'Erro no servidor' });
+        }
+    }
 }
 
 module.exports = new LocaisController()

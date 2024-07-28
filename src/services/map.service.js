@@ -13,7 +13,7 @@ async function getMapLocal(cep){
 
         return dataCep
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return {erro: 'CEP não encontrado'}
     }
 }

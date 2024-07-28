@@ -8,5 +8,6 @@ LocaisRouter.get('/', LocaisController.listar);
 LocaisRouter.get('/:id', LocaisController.listarUm);
 LocaisRouter.put('/:id', LocaisController.editar);
 LocaisRouter.delete('/:id', LocaisController.deletar);
+LocaisRouter.get('/:id/maps',LocaisController.mapaLocal);
 
 module.exports = LocaisRouter
