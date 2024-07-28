@@ -39,30 +39,30 @@ class LocaisController {
 
             // API para solicitar datos faltantes
             const local = await Local.create({
-                // nomeLocal: dados.nomeLocal,
-                // usuarioId: request.usuarioId,
-                // descricao: dados.descricao,
-                // cep: dados.cep,
-                // numeroLocal: dados.numeroLocal,
-                // latitude: dadosApi.lat,
-                // longitude: dadosApi.lng,
-                // logradouro: dadosApi.address,
-                // bairro: dadosApi.district,
-                // cidade: dadosApi.city,
-                // estado: dadosApi.state,
-                // linkGoogleMaps: linkGoogleMaps
                 nomeLocal: dados.nomeLocal,
-                usuarioId: request.usuarioId,// CHECK
+                usuarioId: request.usuarioId,
                 descricao: dados.descricao,
                 cep: dados.cep,
                 numeroLocal: dados.numeroLocal,
-                latitude: dados.latitude,
-                longitude: dados.longitude,
-                logradouro: dados.logradouro,
-                bairro: dados.bairro,
-                cidade: dados.cidade,
-                estado: dados.estado,
-                linkGoogleMaps: dados.linkGoogleMaps
+                latitude: dadosApi.lat,
+                longitude: dadosApi.lng,
+                logradouro: dadosApi.address,
+                bairro: dadosApi.district,
+                cidade: dadosApi.city,
+                estado: dadosApi.state,
+                linkGoogleMaps: linkGoogleMaps
+                // nomeLocal: dados.nomeLocal,
+                // usuarioId: request.usuarioId,// CHECK
+                // descricao: dados.descricao,
+                // cep: dados.cep,
+                // numeroLocal: dados.numeroLocal,
+                // latitude: dados.latitude,
+                // longitude: dados.longitude,
+                // logradouro: dados.logradouro,
+                // bairro: dados.bairro,
+                // cidade: dados.cidade,
+                // estado: dados.estado,
+                // linkGoogleMaps: dados.linkGoogleMaps
             })
 
             response.status(201).json(local);
