@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const connection = require("../database/connection");
-const {hashSync} = require('bcryptjs');
+const { hashSync } = require('bcryptjs');
 
 const Usuario = connection.define('usuarios', {
     nome: {
@@ -25,12 +25,15 @@ const Usuario = connection.define('usuarios', {
     dataNascimento: {
         type: DataTypes.DATE
     }
+},
+{
+     paranoid: true //  Habilita soft delete
 })
 
 
 
 //para hash la contrasena, esta hash sinc es sincrona
-Usuario.beforeSave((usuario) =>{
+Usuario.beforeSave((usuario) => {
     usuario.senha = hashSync(usuario.senha, 10)
     return usuario
 })
