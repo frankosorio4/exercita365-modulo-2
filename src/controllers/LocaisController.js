@@ -91,7 +91,7 @@ class LocaisController {
                 return response.status(403).json({mensagem: 'Você nao tem permissao listar este local.'})
             }
 
-            return response.status(201).json(local);
+            return response.status(200).json(local);
             
         } catch (error) {
             console.log(error);
@@ -209,7 +209,7 @@ class LocaisController {
             }
 
             if(local.usuarioId !== request.usuarioId){
-                return response.status(403).json({mensagem: 'Você nao tem permissao para deletar este local'})
+                return response.status(403).json({mensagem: 'Você nao tem permissao para accesar este local'})
             }
 
             return response.status(200).json(local.linkGoogleMaps)

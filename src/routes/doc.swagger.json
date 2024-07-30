@@ -1,0 +1,969 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Exercita 365",
+    "description": "API para gerenciar locais de exercicio.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Bearer <token>"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/usuario/": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "example": "any"
+                },
+                "sexo": {
+                  "example": "any"
+                },
+                "cpf": {
+                  "example": "any"
+                },
+                "endereco": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "senha": {
+                  "example": "any"
+                },
+                "dataNascimento": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/local/": {
+      "post": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Cria um novo local",
+        "description": "Endpoint para criar um novo local",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "novoLocal",
+            "in": "body",
+            "description": "Informações do Localis",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeLocalis": {
+                  "type": "string",
+                  "example": "Nome do Local"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descriçao do localis"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "numeroLocalis": {
+                  "type": "string",
+                  "example": "123"
+                }
+              },
+              "required": [
+                "nomeLocalis",
+                "descricao",
+                "cep",
+                "numeroLocalis"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Local criado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Nome do Local"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descrição do local"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "numeroLocal": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "latitude": {
+                  "type": "string",
+                  "example": "12.345678"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "-12.345678"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua Exemplo"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Bairro Exemplo"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Cidade Exemplo"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Estado Exemplo"
+                },
+                "linkGoogleMaps": {
+                  "type": "string",
+                  "example": "https://www.google.com/maps?q=12.345678,-12.345678"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Token não anexado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "CEP não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "CEP não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Lista todos os locais",
+        "description": "Endpoint para listar todos os locais cadastrados pelo usuário",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Locais listados com sucesso",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nomeLocal": {
+                    "type": "string",
+                    "example": "Nome do Local"
+                  },
+                  "descricao": {
+                    "type": "string",
+                    "example": "Descrição do local"
+                  },
+                  "cep": {
+                    "type": "string",
+                    "example": "12345678"
+                  },
+                  "numeroLocal": {
+                    "type": "string",
+                    "example": "123"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "example": "12.345678"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "example": "-12.345678"
+                  },
+                  "logradouro": {
+                    "type": "string",
+                    "example": "Rua Exemplo"
+                  },
+                  "bairro": {
+                    "type": "string",
+                    "example": "Bairro Exemplo"
+                  },
+                  "cidade": {
+                    "type": "string",
+                    "example": "Cidade Exemplo"
+                  },
+                  "estado": {
+                    "type": "string",
+                    "example": "Estado Exemplo"
+                  },
+                  "linkGoogleMaps": {
+                    "type": "string",
+                    "example": "https://www.google.com/maps?q=12.345678,-12.345678"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-06-27T00:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-06-27T00:00:00.000Z"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/local/{id}": {
+      "get": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Lista um local específico",
+        "description": "Endpoint para listar um local específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Nome do Local"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descrição do local"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "numeroLocal": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "latitude": {
+                  "type": "string",
+                  "example": "12.345678"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "-12.345678"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua Exemplo"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Bairro Exemplo"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Cidade Exemplo"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Estado Exemplo"
+                },
+                "linkGoogleMaps": {
+                  "type": "string",
+                  "example": "https://www.google.com/maps?q=12.345678,-12.345678"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Permissão negada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Você não tem permissão para editar este local"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Local não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Local não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Edita um local",
+        "description": "Endpoint para editar um local existente",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "local",
+            "in": "body",
+            "description": "Informações atualizadas do local",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Nome do Local"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descrição do local"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "numeroLocal": {
+                  "type": "string",
+                  "example": "123"
+                }
+              },
+              "required": [
+                "nomeLocal",
+                "descricao",
+                "cep",
+                "numeroLocal"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local atualizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nomeLocal": {
+                  "type": "string",
+                  "example": "Nome do Local Atualizado"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descrição do local atualizada"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "numeroLocal": {
+                  "type": "string",
+                  "example": "123"
+                },
+                "latitude": {
+                  "type": "string",
+                  "example": "12.345678"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "-12.345678"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua Exemplo"
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Bairro Exemplo"
+                },
+                "cidade": {
+                  "type": "string",
+                  "example": "Cidade Exemplo"
+                },
+                "estado": {
+                  "type": "string",
+                  "example": "Estado Exemplo"
+                },
+                "linkGoogleMaps": {
+                  "type": "string",
+                  "example": "https://www.google.com/maps?q=12.345678,-12.345678"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-06-27T00:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Você deve introduzir um destes campos: nome, descrição do local, CEP ou número de local."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Permissão negada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Você não tem permissão para editar este local"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "CEP não encontrado ou Local não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "CEP não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Deleta um local específico",
+        "description": "Endpoint para deletar um local específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local excluído com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Local excluído com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Permissão negada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Você não tem permissão para editar este local"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Local não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Local não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/local/{id}/maps": {
+      "get": {
+        "tags": [
+          "Locais"
+        ],
+        "summary": "Obtém o link do Google Maps para um local específico",
+        "description": "Endpoint para obter o link do Google Maps para um local específico",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "ID do local"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Link do Google Maps gerado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "link": {
+                  "type": "string",
+                  "example": "https://www.google.com/maps?q=12.345678,-12.345678"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não Autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "O Token está inválido ou expirado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "403": {
+            "description": "Permissão negada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Você não tem permissão para editar este local"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "404": {
+            "description": "Local não encontrado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Local não encontrado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Erro no servidor"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
+}
