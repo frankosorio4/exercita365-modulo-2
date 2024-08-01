@@ -32,7 +32,7 @@ class UsuarioController {
             if (dados.nome?.length > 100) {
                 return response
                     .status(400)
-                    .json({ mensagem: 'O nome nao pode ter mais de 100 digitos.' })
+                    .json({ mensagem: 'O nome não pode ter mais de 100 digitos.' })
             }
 
             if (!isNaN(dados.nome)){
@@ -45,7 +45,7 @@ class UsuarioController {
             if (!valoresSexo.includes(dados.sexo)) {
                 return response
                     .status(400)
-                    .json({ mensagem: 'O valor de sexo é inválido. Os valores permitidos são: Masculino, Feminino, ou Nao especificado.' })
+                    .json({ mensagem: 'O valor de sexo é inválido. Os valores permitidos são: \"Masculino\", \"Feminino\", ou \"Nao especificado\".' })
             }
 
             if (!padraoCPF.test(dados.cpf)) {

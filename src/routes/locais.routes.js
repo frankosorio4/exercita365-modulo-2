@@ -10,7 +10,7 @@ LocaisRouter.post('/', LocaisController.criar
         #swagger.description = 'Endpoint para criar um novo local',
         #swagger.parameters['novoLocal'] = {
             in: 'body',
-            description: 'Informações do Local',
+            description: 'Informações do Local. Você pode criar um novo local com os seguintes dados, ou modificá-los.',
             required: true,
             schema: { 
                 $nomeLocal: 'Nome do Local',
@@ -65,7 +65,7 @@ LocaisRouter.get('/', LocaisController.listar
     /*
         #swagger.tags = ['Locais']
         #swagger.summary = 'Lista todos os locais'
-        #swagger.description = 'Endpoint para listar todos os locais cadastrados pelo usuário'
+        #swagger.description = 'End point para listar todos os locais cadastrados pelo usuário.'
         #swagger.responses[200] = {
             description: 'Locais listados com sucesso',
             schema: [
@@ -109,7 +109,7 @@ LocaisRouter.get('/:id', LocaisController.listarUm
         #swagger.description = 'End point para listar um local específico'
         #swagger.parameters['id'] = {
             in: 'path',
-            description: 'ID do local',
+            description: 'Forneça o ID do local que você quer listar.',
             required: true,
             type: 'integer'
         }
@@ -162,13 +162,13 @@ LocaisRouter.put('/:id', LocaisController.editar
         #swagger.description = 'End point para editar um local existente'
         #swagger.parameters['id'] = {
             in: 'path',
-            description: 'ID do local',
+            description: 'Forneça o ID do local que você quer editar.',
             required: true,
             type: 'integer'
         }
         #swagger.parameters['local'] = {
             in: 'body',
-            description: 'Você pode editar um o mais campos dos quatro listados embaixo.',
+            description: 'Você pode editar um o mais campos dos quatro listados embaixo.  Se não quiser editar um campo, pode apagar ele.',
             required: true,
             schema: { 
                 $nomeLocal: 'Novo nome do Local',
@@ -230,7 +230,7 @@ LocaisRouter.delete('/:id', LocaisController.deletar
         #swagger.description = 'End point para deletar um local específico'
         #swagger.parameters['id'] = {
             in: 'path',
-            description: 'ID do local',
+            description: 'Forneça o ID do local que você quer apagar.',
             required: true,
             type: 'integer'
         }
@@ -268,7 +268,7 @@ LocaisRouter.get('/:id/maps', LocaisController.mapaLocal
         #swagger.description = 'End point para obter o link do Google Maps para um local específico'
         #swagger.parameters['id'] = {
             in: 'path',
-            description: 'ID do local',
+            description: 'Forneça o ID do local que você quer obter o link do GoogleMaps.',
             required: true,
             type: 'integer'
         }

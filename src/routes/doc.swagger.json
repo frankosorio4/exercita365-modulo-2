@@ -30,7 +30,7 @@
           {
             "name": "login",
             "in": "body",
-            "description": "Informações para login",
+            "description": "Informações para login. Você pode se conectar com os seguintes dados ou usar seu usuário.",
             "required": true,
             "schema": {
               "type": "object",
@@ -115,7 +115,7 @@
           {
             "name": "dados",
             "in": "body",
-            "description": "Informações do novo usuário",
+            "description": "Você pode criar um novo usuário com os seguintes dados ou modificalos.",
             "required": true,
             "schema": {
               "type": "object",
@@ -261,7 +261,7 @@
           {
             "name": "novoLocal",
             "in": "body",
-            "description": "Informações do Local",
+            "description": "Informações do Local. Você pode criar um novo local com os seguintes dados, ou modificá-los.",
             "required": true,
             "schema": {
               "type": "object",
@@ -427,7 +427,7 @@
           "Locais"
         ],
         "summary": "Lista todos os locais",
-        "description": "Endpoint para listar todos os locais cadastrados pelo usuário",
+        "description": "End point para listar todos os locais cadastrados pelo usuário.",
         "parameters": [
           {
             "name": "authorization",
@@ -567,7 +567,7 @@
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID do local"
+            "description": "Forneça o ID do local que você quer listar."
           },
           {
             "name": "authorization",
@@ -732,7 +732,7 @@
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID do local"
+            "description": "Forneça o ID do local que você quer editar."
           },
           {
             "name": "authorization",
@@ -742,7 +742,7 @@
           {
             "name": "local",
             "in": "body",
-            "description": "Você pode editar um o mais campos dos quatro listados embaixo.",
+            "description": "Você pode editar um o mais campos dos quatro listados embaixo. Se não quiser editar um campo, pode apagar ele.",
             "required": true,
             "schema": {
               "type": "object",
@@ -930,7 +930,7 @@
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID do local"
+            "description": "Forneça o ID do local que você quer apagar."
           },
           {
             "name": "authorization",
@@ -1045,7 +1045,7 @@
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "ID do local"
+            "description": "Forneça o ID do local que você quer obter o link do GoogleMaps."
           },
           {
             "name": "authorization",

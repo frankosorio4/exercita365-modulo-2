@@ -11,7 +11,7 @@ UsuariosRouter.post('/',UsuariosController.criarConta
     #swagger.description = 'Endpoint para criação de uma nova conta de usuário'
     #swagger.parameters['dados'] = {
         in: 'body',
-        description: 'Informações do novo usuário',
+        description: 'Você pode criar um novo usuário com os seguintes dados ou modificalos.',
         required: true,
         schema: {
                 $nome: "Usuario4",

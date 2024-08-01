@@ -21,7 +21,7 @@ class LocaisController {
             if (dados.nome?.length > 100) {
                 return response
                     .status(400)
-                    .json({ mensagem: 'O nome nao pode ter mais de 100 digitos.' })
+                    .json({ mensagem: 'O nome não pode ter mais de 100 digitos.' })
             }
 
             //validating cep
@@ -67,7 +67,7 @@ class LocaisController {
             });
             //validating if user create the local
             if (locais.length === 0){
-                return response.status(200).json({mensagem: 'Você nao tem locais cadastrados.'})
+                return response.status(200).json({mensagem: 'Você nâo tem locais cadastrados.'})
             }
             return response.status(200).json(locais);
         } catch (error) {
@@ -88,7 +88,7 @@ class LocaisController {
 
             //validating if user create the local
             if(local.usuarioId !== request.usuarioId){
-                return response.status(403).json({mensagem: 'Você nao tem permissao para listar este local.'})
+                return response.status(403).json({mensagem: 'Você não tem permissao para listar este local.'})
             }
 
             return response.status(200).json(local);
@@ -185,7 +185,7 @@ class LocaisController {
 
             //validating if user create the local
             if(local.usuarioId !== request.usuarioId){
-                return response.status(403).json({mensagem: 'Você nao tem permissao para deletar este local'})
+                return response.status(403).json({mensagem: 'Você não tem permissao para deletar este local'})
             }
 
             await local.destroy();
@@ -209,7 +209,7 @@ class LocaisController {
             }
 
             if(local.usuarioId !== request.usuarioId){
-                return response.status(403).json({mensagem: 'Você nao tem permissao para accesar este local'})
+                return response.status(403).json({mensagem: 'Você não tem permissao para accesar este local'})
             }
 
             return response.status(200).json(local.linkGoogleMaps)

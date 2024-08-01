@@ -14,7 +14,7 @@ class LoginController {
         #swagger.description = 'Endpoint para autenticação do usuário e geração de token JWT'
         #swagger.parameters['login'] = {
             in: 'body',
-            description: 'Informações para login',
+            description: 'Informações para login. Você pode se conectar com os seguintes dados ou usar seu usuário.',
             required: true,
             schema: {
                     $email:  'usuario1@example.com',
