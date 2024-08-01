@@ -21,87 +21,226 @@
   "paths": {
     "/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Login"
+        ],
+        "summary": "Realiza o login de um usuário",
+        "description": "Endpoint para autenticação do usuário e geração de token JWT",
         "parameters": [
           {
-            "name": "body",
+            "name": "login",
             "in": "body",
+            "description": "Informações para login",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "usuario1@example.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "12345678"
                 }
-              }
+              },
+              "required": [
+                "email",
+                "senha"
+              ]
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Login realizado com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string",
+                  "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Nome do Usuário"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Nome e senha são obrigatórios ou formato de email inválido",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Nome e senha são obrigatórios"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "Conta não encontrada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Conta não encontrada"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
     },
     "/usuario/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Cria uma nova conta de usuário",
+        "description": "Endpoint para criação de uma nova conta de usuário",
         "parameters": [
           {
-            "name": "body",
+            "name": "dados",
             "in": "body",
+            "description": "Informações do novo usuário",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Usuario4"
                 },
                 "sexo": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Masculino"
                 },
                 "cpf": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "12345678915"
                 },
                 "endereco": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Endereço do Usuário"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "usuario4@exemplo.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "senha123"
                 },
                 "dataNascimento": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2000-01-01"
                 }
-              }
+              },
+              "required": [
+                "nome",
+                "sexo",
+                "cpf"
+              ]
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Conta criada com sucesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Nome do Usuário"
+                },
+                "sexo": {
+                  "type": "string",
+                  "example": "Masculino"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "12345678901"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Endereço do Usuário"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "usuario@exemplo.com"
+                },
+                "dataNascimento": {
+                  "type": "string",
+                  "example": "2000-01-01"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2024-06-27T00:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Um o mais dados faltantes. O nome, sexo, cpf, endereço, email, senha, e data de nascimento são obrigatórios."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "409": {
-            "description": "Conflict"
+            "description": "Conflito de dados",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Cpf ja cadastrado."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Erro no servidor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Não foi possível criar a conta."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         }
       }
@@ -122,33 +261,33 @@
           {
             "name": "novoLocal",
             "in": "body",
-            "description": "Informações do Localis",
+            "description": "Informações do Local",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "nomeLocalis": {
+                "nomeLocal": {
                   "type": "string",
                   "example": "Nome do Local"
                 },
                 "descricao": {
                   "type": "string",
-                  "example": "Descriçao do localis"
+                  "example": "Descriçao do local"
                 },
                 "cep": {
                   "type": "string",
-                  "example": "12345678"
+                  "example": "88085540"
                 },
-                "numeroLocalis": {
+                "numeroLocal": {
                   "type": "string",
                   "example": "123"
                 }
               },
               "required": [
-                "nomeLocalis",
+                "nomeLocal",
                 "descricao",
                 "cep",
-                "numeroLocalis"
+                "numeroLocal"
               ]
             }
           }
@@ -173,7 +312,7 @@
                 },
                 "cep": {
                   "type": "string",
-                  "example": "12345678"
+                  "example": "88085540"
                 },
                 "numeroLocal": {
                   "type": "string",
@@ -228,7 +367,7 @@
               "properties": {
                 "mensagem": {
                   "type": "string",
-                  "example": "Token não anexado"
+                  "example": "Os campos nome, descrição do local, cep são obrigatórios"
                 }
               },
               "xml": {
@@ -368,7 +507,19 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Token não anexado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Não Autorizado",
@@ -493,7 +644,19 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Token não anexado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Não Autorizado",
@@ -594,7 +757,7 @@
                 },
                 "cep": {
                   "type": "string",
-                  "example": "12345678"
+                  "example": "88051010"
                 },
                 "numeroLocal": {
                   "type": "string",
@@ -792,7 +955,19 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Token não anexado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Não Autorizado",
@@ -895,7 +1070,19 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Dados inválidos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensagem": {
+                  "type": "string",
+                  "example": "Token não anexado"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
             "description": "Não Autorizado",

@@ -45,7 +45,7 @@ class UsuarioController {
             if (!valoresSexo.includes(dados.sexo)) {
                 return response
                     .status(400)
-                    .json({ mensagem: 'O valor de sexo é inválido. Os valores permitidos são: Masculino, Feminino, ou  Nao especificado.' })
+                    .json({ mensagem: 'O valor de sexo é inválido. Os valores permitidos são: Masculino, Feminino, ou Nao especificado.' })
             }
 
             if (!padraoCPF.test(dados.cpf)) {

@@ -10,13 +10,13 @@ LocaisRouter.post('/', LocaisController.criar
         #swagger.description = 'Endpoint para criar um novo local',
         #swagger.parameters['novoLocal'] = {
             in: 'body',
-            description: 'Informações do Localis',
+            description: 'Informações do Local',
             required: true,
             schema: { 
-                $nomeLocalis: 'Nome do Local',
-                $descricao: 'Descriçao do localis',
-                $cep: "12345678",
-                $numeroLocalis: "123"
+                $nomeLocal: 'Nome do Local',
+                $descricao: 'Descriçao do local',
+                $cep: "88085540",
+                $numeroLocal: "123"
             }
         },
         #swagger.responses[201] = { 
@@ -25,7 +25,7 @@ LocaisRouter.post('/', LocaisController.criar
                 id: 1,
                 nomeLocal: 'Nome do Local',
                 descricao: 'Descrição do local',
-                cep: '12345678',
+                cep: '88085540',
                 numeroLocal: '123',
                 latitude: '12.345678',
                 longitude: '-12.345678',
@@ -173,7 +173,7 @@ LocaisRouter.put('/:id', LocaisController.editar
             schema: { 
                 $nomeLocal: 'Nome do Local',
                 $descricao: 'Descrição do local',
-                $cep: '12345678',
+                $cep: '88051010',
                 $numeroLocal: '123'
             }
         }
