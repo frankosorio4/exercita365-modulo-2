@@ -88,7 +88,7 @@ class LocaisController {
 
             //validating if user create the local
             if(local.usuarioId !== request.usuarioId){
-                return response.status(403).json({mensagem: 'Você nao tem permissao listar este local.'})
+                return response.status(403).json({mensagem: 'Você nao tem permissao para listar este local.'})
             }
 
             return response.status(200).json(local);
