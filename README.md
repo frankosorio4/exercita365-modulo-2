@@ -1,79 +1,122 @@
 # Exercita365
 
-O Exercita365 é uma aplicação Back-End que facilita o gerenciamento de exercícios e locais para atividades físicas serem praticadas. Os usuários podem cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. O Exercita365 aplicação Back-End, é API Rest, codificada com uso do Node, Express e PostgreSQL.
+O **Exercita365** é uma aplicação Back-End que facilita o gerenciamento de exercícios e locais para atividades físicas. Os usuários podem cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. A aplicação é uma API REST, desenvolvida com Node.js, Express e PostgreSQL.
 
+## Tecnologias Utilizadas
+- **Node.js**
 
-## Tecnologias utilizadas
-- NODEJS
+![Node.js](https://github.com/FuturoDEV-Fitness/carrinho-de-compras-frankosorio4/assets/141787907/46063f9a-53d7-461a-858d-9c8238e6984e)
 
-![image](https://github.com/FuturoDEV-Fitness/carrinho-de-compras-frankosorio4/assets/141787907/46063f9a-53d7-461a-858d-9c8238e6984e)
+- **PostgreSQL**
 
-- PGSQL
+![PostgreSQL](https://github.com/FuturoDEV-Fitness/carrinho-de-compras-frankosorio4/assets/141787907/1d2d047d-3887-4b37-9fa4-d5e07620c1a7)
 
-![image](https://github.com/FuturoDEV-Fitness/carrinho-de-compras-frankosorio4/assets/141787907/1d2d047d-3887-4b37-9fa4-d5e07620c1a7)
+## Bibliotecas Utilizadas
 
+- [Express](https://expressjs.com/)
+- [Sequelize](https://sequelize.org/)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [axios](https://axios-http.com/docs/intro)
+- [swagger](https://swagger.io/docs/open-source-tools/swagger-ui/development/setting-up/?sbsearch=node)
 
-## Livrarias utilizadas:
+## Como Executar
 
-- express https://expressjs.com/
-- sequelize https://sequelize.org/
-- jsonwebtoken https://www.npmjs.com/package/jsonwebtoken
-- bcryptjs https://www.npmjs.com/package/bcryptjs
-- axios https://axios-http.com/docs/intro
-- swagger https://swagger.io/docs/open-source-tools/swagger-ui/development/setting-up/?sbsearch=node
+Para executar este projeto, você deve ter instalado no seu computador o [NODEJS](https://nodejs.org/en).
 
+1. **Clone o repositório:**
 
-## Como executar
+    ```bash
+    git clone <URL do repositório>
+    ```
 
-Para executar este projeto, voce debe ter instalado no seo computador o sofware Node.(https://nodejs.org/en)
+2. **Instale as dependências:**
 
-- Clone o repositório.
+    Abra o terminal do **VSCode** ou do seu editor de código no diretório do repositório e instale as bibliotecas necessárias usando o comando:
 
-- Abra o terminal do **vscode** o do seu editor de codigo no diretório do repositório e instale as bibliotecas necesarias usando o comando ```npm install```.
+    ```bash
+        npm install
+    ```
 
-- Descarregue e instaleo gerenciador de banco de dados PostgreSQL (por exemplo, pode usar **pgadmin** https://www.pgadmin.org/download/) e inicielo. Crie uma base de dados para testar o projeto.
+3. **Instale e configure o PostgreSQL:**
 
-- Crie o arquivo das variáveis de ambiente ```.env``` na pasta raiz do projeto y forneça as suas variáveis. Pode usar como modelo o arquivo ```.env_example.js``` providenciado no projeto. Voce debera atualizar os siguintes campos:
+    - Descarregue e instale o gerenciador de banco de dados PostgreSQL (por exemplo, pode usar o **pgAdmin** https://www.pgadmin.org/download/) e inicie-o.
+    - Crie uma base de dados para testar o projeto.
 
-    - APP_PORT=3000 // Padrão, porta do server (express)
-    - DB_HOST=localhost // Padrão, para rodar local
-    - DB_DIALECT=postgres // Padrão, tipo de base de dados
-    - DB_PORT=5432 // Padrao, porta da data base
-    - DB_USER=postgres // Padrão, nome de usuário
-    - DB_DATABASE=dbName // Nome da base de dados
-    - DB_PASSWORD=dbPassword // senha do banco de dados
-    - JWT_SECRET=secretPhrase // Frase secreta para gerar o Token
+4. **Configure as variáveis de ambiente:**
 
-- Rode no terminal o comando ```npx sequelize db:migrate``` para iniciar as migrações. Este comando vai criar as tabelas necessárias na base de dados para poder iniciar o projeto.
+    - Crie o arquivo `.env` na pasta raiz do projeto e forneça as suas variáveis. Pode usar como modelo o arquivo `.env_example.js` providenciado no projeto. Você deverá atualizar os seguintes campos:
 
-- Rode no terminal o comando ```npx sequelize db:seed:all``` para popular as tabelas com os dados iniciais configurados nos seeders.
+    ```dotenv
+        APP_PORT=3000
+        DB_HOST=localhost
+        DB_DIALECT=postgres
+        DB_PORT=5432
+        DB_USER=postgres
+        DB_DATABASE=dbName
+        DB_PASSWORD=dbPassword
+        JWT_SECRET=secretPhrase
+    ```
 
-- Rode no terminal o comando ```npx run swagger``` to generate all the documentation for the swagger file. Este comando foi configurado para rodar o comando ```npm run node ./autoGen.swagger.js```.
+5. **Inicie as migrações:**
 
-- Rode no terminal o comando ```npm run start:dev``` para Iniciar o servidor. Este comando foi configurado para rodar o comando ```npm run nodemon src/index.js```.
+    Rode no terminal o comando:
 
+    ```bash
+    npx sequelize db:migrate
+    ```
 
-## Descrever quais técnicas e tecnologias utilizadas. Aqui você também pode inserir alguma imagem ou diagrama para melhor entendimento
+    Este comando vai criar as tabelas necessárias na base de dados para poder iniciar o projeto.
 
+6. **Popule as tabelas com dados iniciais:**
 
-## Documentação e uso da API
+    Rode no terminal o comando:
 
-Uma vez iniciado o servidor, carregue a URL ```http://localhost:3000/docs/``` usando seu navegador. 
+    ```bash
+    npx sequelize db:seed:all
+    ```
 
-Nesta URL você encontrara a documentação da API y poderá testar todas as rotas de requeste do projeto. Você poderá aceder as seguintes funcionalidades:
+7. **Gere a documentação da API:**
 
-- Cadastrar um usuário (POST).
-- Conectar (Logar) um usuário com o Back-End (POST).
-- Acessar para fazer um CRUD dos Locais de exercício:
-    - POST (Cadastrar um local).
-    - GET (Listar os Locais cadastrados pelo usuário).
-    - GED-id local (Lista um Local específico cadastrado pelo usuário).
-    - PUT-id loca (Editar um Local específico cadastrado pelo usuário).
-    - DELETE-id loca (Apagar um Local específico cadastrado pelo usuário).
+    Rode no terminal o comando:
 
+    ```bash
+    npx run swagger
+    ```
 
-## Modelo de banco de dados
+    Este comando foi configurado para rodar o comando `npm run node ./autoGen.swagger.js`.
 
-## Descrever quais melhorias podem ser aplicadas
+8. **Inicie o servidor:**
 
-Entre outras coisas.
+    Rode no terminal o comando:
+
+    ```bash
+    npm run start:dev
+    ```
+
+    Este comando foi configurado para rodar o comando `npm run nodemon src/index.js`.
+
+## Documentação e Uso da API
+
+Uma vez iniciado o servidor, carregue a URL `http://localhost:3000/docs/` no seu navegador. Nesta URL você encontrará a documentação da API e poderá testar todas as rotas do projeto. As funcionalidades disponíveis incluem:
+
+- **Cadastrar um usuário** (POST).
+- **Conectar (Logar) um usuário** com o Back-End (POST).
+- **Acessar para fazer um CRUD dos Locais de exercício**:
+    - **POST** (Cadastrar um local).
+    - **GET** (Listar os Locais cadastrados pelo usuário).
+    - **GET - id local** (Listar um Local específico cadastrado pelo usuário).
+    - **PUT - id local** (Editar um Local específico cadastrado pelo usuário).
+    - **DELETE - id local** (Apagar um Local específico cadastrado pelo usuário).
+
+## Modelo de Banco de Dados-imagem 
+
+(Incluir diagrama ou descrição do modelo de banco de dados aqui)
+
+## Melhorias Sugeridas
+
+- Configurar um projeto FRONT-END para poder integrar todas as funcionalidades da API.
+- Melhorara a lógica de alguns componentes.
+- Aplicar um sistema de permissões para diferentes tipo De usuários.
+- Implementar a funcionalidade para que o usuário posa editar seu perfil o apagar.
+- Implementar um sistema de Host para o BACK-END e o banco de dados.
