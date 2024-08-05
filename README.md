@@ -111,8 +111,7 @@ Uma vez iniciado o servidor, carregue a URL `http://localhost:3000/docs/` no seu
 
 ## Modelo de Banco de Dados
 
-![image](https://github.com/user-attachments/assets/e7e7dcc1-8192-4f95-b5db-e7d3eb5b04bc)
-
+![image](https://github.com/user-attachments/assets/3806d548-66be-4f93-8f05-99852a7fe0df)
 
 ## Melhorias Sugeridas
 
@@ -120,4 +119,7 @@ Uma vez iniciado o servidor, carregue a URL `http://localhost:3000/docs/` no seu
 - Aplicar um sistema de permissões para diferentes tipo De usuários.
 - Implementar a funcionalidade para que o usuário posa editar ou apagar seu perfil.
 - Implementar um sistema de Host para o BACK-END e banco de dados.
-<!-- - Melhorar a lógica de alguns componentes. -->
+
+## Apresentaçao do projeto
+
+https://drive.google.com/file/d/1nEEzyRFE8JZRfucRL57k6FskEyyds2BR/view?usp=sharing
