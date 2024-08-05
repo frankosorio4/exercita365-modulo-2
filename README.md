@@ -109,9 +109,10 @@ Uma vez iniciado o servidor, carregue a URL `http://localhost:3000/docs/` no seu
     - **PUT - id local** (Editar um Local específico cadastrado pelo usuário).
     - **DELETE - id local** (Apagar um Local específico cadastrado pelo usuário).
 
-## Modelo de Banco de Dados-imagem 
+## Modelo de Banco de Dados
 
-(Incluir diagrama ou descrição do modelo de banco de dados aqui)
+![image](https://github.com/user-attachments/assets/e7e7dcc1-8192-4f95-b5db-e7d3eb5b04bc)
+
 
 ## Melhorias Sugeridas
 
