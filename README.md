@@ -76,7 +76,7 @@ Para executar este projeto, você deve ter instalado no seu computador o [NODEJS
     npx sequelize db:seed:all
     ```
 
-7. **Gere a documentação da API:**
+7. **Carregue a documentação da API:**
 
     Rode no terminal o comando:
 
@@ -115,8 +115,8 @@ Uma vez iniciado o servidor, carregue a URL `http://localhost:3000/docs/` no seu
 
 ## Melhorias Sugeridas
 
-- Configurar um projeto FRONT-END para poder integrar todas as funcionalidades da API.
-- Melhorara a lógica de alguns componentes.
+- Configurar um projeto FRONT-END integrar todas as funcionalidades da API.
 - Aplicar um sistema de permissões para diferentes tipo De usuários.
-- Implementar a funcionalidade para que o usuário posa editar seu perfil o apagar.
-- Implementar um sistema de Host para o BACK-END e o banco de dados.
+- Implementar a funcionalidade para que o usuário posa editar ou apagar seu perfil.
+- Implementar um sistema de Host para o BACK-END e banco de dados.
+<!-- - Melhorar a lógica de alguns componentes. -->
