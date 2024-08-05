@@ -1,6 +1,6 @@
 # Exercita365
 
-O **Exercita365** é uma aplicação Back-End que facilita o gerenciamento de exercícios e locais para atividades físicas. Os usuários podem cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. A aplicação é uma API REST, desenvolvida com Node.js, Express e PostgreSQL.
+O **Exercita365** é uma aplicação Back-End que facilita o gerenciamento de exercícios e locais para atividades físicas. Os usuários podem cadastrar novos locais de exercícios, encontrar pontos próximos, visualizar informações sobre os exercícios em cada ponto e registrar suas próprias contribuições para o sistema. A aplicação é uma API REST, desenvolvida com Node.js e PostgreSQL.
 
 ## Tecnologias Utilizadas
 - **Node.js**
