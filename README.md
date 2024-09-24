@@ -81,7 +81,7 @@ Para executar este projeto, você deve ter instalado no seu computador o [NODEJS
     Rode no terminal o comando:
 
     ```bash
-    npx run swagger
+    npm run swagger
     ```
 
     Este comando foi configurado para rodar o comando `npm run node ./autoGen.swagger.js`.
